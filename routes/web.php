@@ -14,4 +14,7 @@ use App\Http\Controllers\TodoController;
 |
 */
 // トップページ
-Route::get('/', [TodoController::class, 'top']);
+Route::get('/', [TodoController::class, 'top'])->name('todolists');
+Route::post('/todo/create', [TodoController::class, 'create'])->name('todocreate');
+Route::post('/todo/update', [TodoController::class, 'update'])->name('todoupdate');
+Route::post('/todo/delete', [TodoController::class, 'delete'])->name('tododelete');
