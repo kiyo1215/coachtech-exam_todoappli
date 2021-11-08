@@ -14,8 +14,8 @@ class CreateTodolistsTable extends Migration
     public function up()
     {
         Schema::create('todolists', function (Blueprint $table) {
-            $table->id();
-            // $table->bigIncrements('id', 20);
+            // $table->id('id');
+            $table->bigIncrements('id', 20);
             $table->string('content', 191);
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

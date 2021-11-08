@@ -10,14 +10,14 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
-@extends('layout')
+<!-- @extends('layout') -->
 @section('content')
   <div class="todo">
     <h1>Todo List</h1>
-    <form method="POST" action="{{ route('todocreate') }}">
+    <form method="POST" action="{{route('todocreate')}}">
   @csrf
       <div class="add-form">
-        <input type="text" class="add-text">
+        <input type="text" class="add-text" name="content">
         <button class="add-button" tyoe="submit">追加</button>
       </div>
     </form>
@@ -31,10 +31,17 @@
       </tr>
       @foreach($todolists as $todolist)
       <tr>
-        <td class="date">{{$todolist -> created_at}}</td>
-        <td class="task-name"><input type="text" class="task" value="{{$todolist -> content}}"></td>
-        <td class="update-button"><button class="update">更新</button></td>
-        <td class="delete-button"><button class="delete">削除</button></td>
+        <td class="date">{{$todolist->created_at}}</td>
+        <td class="task-name">
+        <form method="post" action="{{route('todoupdate')}}">
+        @csrf
+          <input type="text" class="task" name="content" value="{{$todolist->content}}"></td>
+          <td class="update-button"><button class="update" type="submit" onclick=>更新</button></td>
+        </form>
+        <form method="post" action="{{route('tododelete')}}">
+        @csrf
+          <td class="delete-button"><button class="delete" type="submit" onclick=>削除</button></td>
+        </form>
       </tr>
       @endforeach
     </tbody>

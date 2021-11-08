@@ -16,29 +16,40 @@ class TodoController extends Controller
      */
     public function top(Request $request)
     {
-        // $todolists = Todolist::all();
         $todolists = DB::table('todolists')->get();
         // dd($todolists);
         return view('todo.top', ['todolists' => $todolists]);
     }
     public function create(TodoRequest $request)
     {
-        // $this->validate($request, Todolist::$rules);
-        // $form = $request->all();
-        // Todokist::create($form);
-        // return redirect('/');
         $param = [
             'content' => $request->content,
         ];
         DB::table('todolists')->insert($param);
         return redirect('/');
     }
-    // public function update(Request $request)
-    // {
-
-    // }
-    // public function delete(Request $request)
-    // {
-
-    // }
+    public function edit(TodoRequest $request)
+    {
+        DB::table('todolists')->where('id', $request->id)->first();
+    }
+    public function update(TodoRequest $request)
+    {
+        $param = [
+            'content' => $request->content,
+        ];
+        DB::teble('todolists')->where('id', $request->id)->update($param);
+        return redirect('/');
+    }
+    public function remove(TodoRequest $request)
+    {
+        DB::teble('todolists')->where('id', $request->id)->first();
+    }
+    
+    public function delete(TodoRequest $request)
+    {
+        // Todolist::destroy(id);
+        $param = ['id' => $request->id];
+        DB::table('todolists')->where('id', $request->id)->delete();
+        return redirect('/');
+    }
 }
