@@ -32,16 +32,25 @@
       @foreach($todolists as $todolist)
       <tr>
         <td class="date">{{$todolist->created_at}}</td>
+
         <td class="task-name">
-        <form method="post" action="{{route('todoupdate')}}">
+        <form method="post" action="/todo/update">
         @csrf
-          <input type="text" class="task" name="content" value="{{$todolist->content}}"></td>
-          <td class="update-button"><button class="update" type="submit" onclick=>更新</button></td>
+          <input type="text" class="task" name="id" value="{{$todolist->content}}">
+        </td>
+
+        <td class="update-button">
+          <button class="update" type="submit" onclick=>更新</button>
         </form>
-        <form method="post" action="{{route('tododelete')}}">
+        </td>
+
+        <td class="delete-button">
+        <form method="post" action="/todo/delete">
+        <input type="hidden" name="id" value="{{$todolist->id}}">
         @csrf
-          <td class="delete-button"><button class="delete" type="submit" onclick=>削除</button></td>
+        <button class="delete" type="submit" onclick=>削除</button>
         </form>
+        </td>
       </tr>
       @endforeach
     </tbody>
