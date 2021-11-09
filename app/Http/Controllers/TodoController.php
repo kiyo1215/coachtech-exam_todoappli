@@ -30,14 +30,18 @@ class TodoController extends Controller
     }
     public function edit(TodoRequest $request)
     {
+        // $param = ['content' => $request->content];
         // $todolist = Todolist::find($request->id);
         DB::table('todolists')->where('id', $request->id)->first();
     }
     public function update(TodoRequest $request)
     {
-        $param = ['content' => $request->content];
+        $param = [
+            'content' => $request->content,
+        ];
         // $todolist->save();
-        DB::table('todolists')->where('id', $request->id)->update();
+        DB::table('todolists')->where('id', $request->id)->update($param);
+        // DB::table('todolists')->update($param);
         return redirect('/');
     }
     public function remove(Request $request)

@@ -36,9 +36,9 @@
         <td class="task-name">
         <form method="post" action="/todo/update">
         @csrf
-          <input type="text" class="task" name="id" value="{{$todolist->content}}">
+          <input type="text" class="task" name="content" value="{{$todolist->content}}">
+        
         </td>
-
         <td class="update-button">
           <button class="update" type="submit" onclick=>更新</button>
         </form>
