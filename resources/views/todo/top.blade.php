@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{csrf_token()}}">
   <title>todo</title>
   <link rel="stylesheet" href="{{ asset('css/app.reset.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -16,6 +17,11 @@
     <h1>Todo List</h1>
     <form method="POST" action="{{route('todocreate')}}">
   @csrf
+  @if($errors->has('content'))
+  <div class="content-error">
+    {{$errors->first('content')}}
+  </div>
+  @endif
       <div class="add-form">
         <input type="text" class="add-text" name="content">
         <button class="add-button" tyoe="submit">追加</button>
@@ -40,6 +46,7 @@
         
         </td>
         <td class="update-button">
+        <input type="hidden" class="task" name="id" value="{{$todolist->id}}">
           <button class="update" type="submit" onclick=>更新</button>
         </form>
         </td>

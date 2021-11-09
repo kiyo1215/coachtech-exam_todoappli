@@ -33,6 +33,7 @@ class TodoController extends Controller
         // $param = ['content' => $request->content];
         // $todolist = Todolist::find($request->id);
         DB::table('todolists')->where('id', $request->id)->first();
+        // DB::table('todolists')->find('id', $request->id);
     }
     public function update(TodoRequest $request)
     {
@@ -40,6 +41,7 @@ class TodoController extends Controller
             'content' => $request->content,
         ];
         // $todolist->save();
+        // DB::table('todolists')->where('id', $request->id)->update($param);
         DB::table('todolists')->where('id', $request->id)->update($param);
         // DB::table('todolists')->update($param);
         return redirect('/');
